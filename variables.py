@@ -38,3 +38,11 @@ print(a)
 #b = a[2:4]
 b = a[-3:]
 print(b)
+
+s1 = 'abcdef\''
+print(s1)
+s2 = "abcdef'"
+print(s2)
+
+s3 = 'ab\tdefgh\tij\nklm\\no\płąąźżę'
+print(s3)
