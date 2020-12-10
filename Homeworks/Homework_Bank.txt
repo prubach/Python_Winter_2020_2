@@ -1,0 +1,5 @@
+Please extend the Account, Bank and Customer classes located in bank.py filling in the TODOs by adding:
+- validation for deposit and charge to prevent any misuse of those functions (unsafe operations that can influence the balance of the acoount
+- implementation of transfer(...) in Bank. As you do that please also include validation of input parameters...
+- implementation of calc_interest that should increment the balance of the account accordingly to the interest_rate parameter
+Please provide some code that tests the new functionality
