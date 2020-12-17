@@ -22,16 +22,22 @@ class Account:
 
     def deposit(self, amount):
         #TODO - add validation to prevent misuse
-        self._balance += amount
-        print("Deposited: " + str(amount) + ". The new balance is: " + str(self._balance))
+        if amount < 0:
+            raise NegativeAmountException('Negative amount: {0} amount {1}'.format(self.account_id, amount))
+        else:
+            self._balance += amount
+            print("Deposited: " + str(amount) + ". The new balance is: " + str(self._balance))
 
     def charge(self, amount):
         #TODO - add validation to prevent misuse
+        if amount < 0:
+            raise NegativeAmountException('Negative amount: {0} amount {1}'.format(self.account_id, amount))
         if self._balance >= amount:
             self._balance -= amount
             print("Charged: " + str(amount) + ". The new balance is: " + str(self._balance))
         else:
-            print("Sorry, you do not have that much money on your account to withdraw: " + amount)
+            raise NotEnoughMoneyException('Not enough... ' + str(amount))
+            #print("Sorry, you do not have that much money on your account to withdraw: " + str(amount))
 
     def calc_interest(self):
         #TODO - add implementation based on self.interest_rate
@@ -60,21 +66,36 @@ class Bank:
         self.accounts.append(a)
         return a
 
-    def transfer(self, acc_id_from, acc_id_to, amount):
+    def transfer(self, acc_from, acc_to, amount):
         # TODO - implement it (input parameters are account ids)
-        pass
+        acc_from.charge(amount)
+        acc_to.deposit(amount)
 
     def __repr__(self):
         return 'Bank(cust: {0}, acc: {1})'.format(self.customers, self.accounts)
 
 
-bank = Bank()
+class BankException(Exception):
+    pass
 
-c1 = bank.create_customer("Jan", "Kowalski", "j.kowalski@gmail.com")
-print(c1)
-a1 = bank.create_account(c1)
-print(a1)
-a1.deposit(200)
-a1.charge(100)
+class NotEnoughMoneyException(BankException):
+    pass
 
-print(bank)
+class NegativeAmountException(BankException):
+    pass
+
+
+try:
+    bank = Bank()
+    c1 = bank.create_customer("Jan", "Kowalski", "j.kowalski@gmail.com")
+    print(c1)
+    a1 = bank.create_account(c1)
+    a2 = bank.create_account(c1)
+    print(a1)
+    a1.deposit(200)
+    a2.deposit(100)
+    print(bank)
+    bank.transfer(a1, a2, 250)
+    print(bank)
+except BankException as be:
+    print(str(be))
