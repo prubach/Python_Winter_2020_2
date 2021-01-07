@@ -24,9 +24,9 @@ print('CPUs: %s' % (multiprocessing.cpu_count()))
 
 shared_list = []
 
-thread1 = MyThread('Thread 1', 1, 5, shared_list)
-thread2 = MyThread('Thread 2', 1, 5, shared_list)
-thread3 = MyThread('Thread 3', 1, 5, shared_list)
+thread1 = MyThread('Thread 1', 1, 10, shared_list)
+thread2 = MyThread('Thread 2', 1, 10, shared_list)
+thread3 = MyThread('Thread 3', 1, 10, shared_list)
 # Sequentially
 #thread1.run()
 #thread2.run()
