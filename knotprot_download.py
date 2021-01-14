@@ -4,6 +4,8 @@ import os
 from pathlib import Path
 from urllib.request import urlopen, Request
 from time import time
+# activate your venv and install Pillow:
+# pip install Pillow
 from PIL import Image
 
 SEARCH_STRING = 'https://knotprot.cent.uw.edu.pl/browse/?set=True&bridgeType=probab&slipknotTypes=41&raw=1'
